@@ -16,12 +16,12 @@ User.find({}).remove(() => {
             email: 'damien.dellamico@gmail.com',
             password: 'test',
             roles: ['user', 'admin'],
-            avatar: 'http://orig02.deviantart.net/ec99/f/2010/345/0/5/cat_avatar_by_katkooota-d34p5iz.jpg'
+            avatar: ''
         }, {
             provider: 'local',
-            firstName: 'Erika',
-            lastName: 'Scola',
-            email: 'erika.scola@gmail.com',
+            firstName: 'user1',
+            lastName: 'lastname1',
+            email: 'user1@gmail.com',
             password: 'test'
         }, () => {
             logger.info('Finished populating users');
@@ -31,16 +31,16 @@ User.find({}).remove(() => {
 
 Image.find({}).remove(function () {
     Image.create({
-        fileName: 'Cat 1',
-        url: 'http://images.sodahead.com/profiles/0/0/2/3/1/3/1/8/7/Me-as-cat-40837791094.jpeg',
+        fileName: 'image 1',
+        url: '',
         user: testUserId
     }, {
-        fileName: 'Cat 2',
-        url: 'https://www.petfinder.com/wp-content/uploads/2012/11/99233806-bringing-home-new-cat-632x475.jpg',
+        fileName: 'image 2',
+        url: '',
         user: testUserId
     }, {
-        fileName: 'Cat 3',
-        url: 'https://upload.wikimedia.org/wikipedia/commons/2/22/Turkish_Van_Cat.jpg',
+        fileName: 'image 3',
+        url: '',
         user: testUserId
     }, () => {
         logger.info('Finished populating images');

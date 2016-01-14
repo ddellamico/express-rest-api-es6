@@ -12,7 +12,7 @@ const config = Object.freeze({
 
     // Token settings
     token: {
-        secret: process.env.TOKEN_SECRET || 'pet-finder',
+        secret: process.env.TOKEN_SECRET || 'secret',
         expiration: process.env.TOKEN_EXPIRATION || 60 * 60 * 24 //24 hours
     },
 
@@ -24,7 +24,7 @@ const config = Object.freeze({
 
     // MongoDB settings
     mongodb: {
-        dbURI: 'mongodb://' + (process.env.PETFINDER_DB_1_PORT_27017_TCP_ADDR || 'localhost') + ':27017/pet-finder',
+        dbURI: 'mongodb://' + (process.env.PETFINDER_DB_1_PORT_27017_TCP_ADDR || 'localhost') + ':27017/db-name',
         dbOptions: {'user': '', 'pass': ''}
     },
 

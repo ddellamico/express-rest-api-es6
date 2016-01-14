@@ -1,7 +1,7 @@
 {
-  "name": "pet-finder-server",
+  "name": "express-rest-api-es6",
   "version": "0.0.1",
-  "description": "Pet finder server api",
+  "description": "Express & ES6 REST API Boilerplate",
   "author": {
     "name": "Damien Dell'Amico",
     "url": "https://github.com/ddellamico"
@@ -29,13 +29,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/ddellamico/pet-finder"
+    "url": "https://github.com/ddellamico/express-rest-api-es6"
   },
   "engines": {
     "node": ">=5.x"
   },
   "bugs": {
-    "url": "https://github.com/ddellamico/pet-finder/issues"
+    "url": "https://github.com/ddellamico/express-rest-api-es6/issues"
   },
   "files": [
     "src",
@@ -44,8 +44,8 @@
     "README.md"
   ],
   "keywords": [
-    "mm",
-    "ionic",
+    "babel",
+    "es6",
     "node",
     "express",
     "mobile"
