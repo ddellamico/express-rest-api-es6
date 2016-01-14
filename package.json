@@ -1,0 +1,101 @@
+{
+  "name": "pet-finder-server",
+  "version": "0.0.1",
+  "description": "Pet finder server api",
+  "author": {
+    "name": "Damien Dell'Amico",
+    "url": "https://github.com/ddellamico"
+  },
+  "main": "app/index.js",
+  "scripts": {
+    "start": "node src/debug.js",
+    "babel": "babel 'src' --out-dir dist --source-maps",
+    "dev": "nodemon ./src/debug.js -L --watch 'src/**/*' --ext 'js'",
+    "debug": "NODE_PORT=3001 iron-node src/debug.js",
+    "prod": "node ./dist/index",
+    "lint": "jshint src/**/*.js",
+    "audit": "nsp audit-shrinkwrap && nsp audit-package",
+    "missing": "npm ls --depth 1",
+    "outdated": "npm outdated --depth 0",
+    "prepush": "npm shrinkwrap && npm test",
+    "postmerge": "npm install",
+    "pretest": "npm run lint"
+  },
+  "pre-commit": [
+    "lint",
+    "audit",
+    "missing",
+    "outdated"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ddellamico/pet-finder"
+  },
+  "engines": {
+    "node": ">=5.x"
+  },
+  "bugs": {
+    "url": "https://github.com/ddellamico/pet-finder/issues"
+  },
+  "files": [
+    "src",
+    "app",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "mm",
+    "ionic",
+    "node",
+    "express",
+    "mobile"
+  ],
+  "dependencies": {
+    "bcryptjs": "^2.1.0",
+    "body-parser": "^1.12.2",
+    "co-express": "^1.2.1",
+    "colors": "^1.0.3",
+    "cors": "^2.7.1",
+    "crypto": "~0.0.3",
+    "express": "^4.13.3",
+    "glob": "^6.0.1",
+    "helmet": "^0.7.0",
+    "jsonwebtoken": "^5.5.0",
+    "lodash": "^3.5.0",
+    "method-override": "^2.3.2",
+    "mm-node-logger": "^0.0.*",
+    "mongoose": "^4.2.9",
+    "morgan": "^1.5.2",
+    "multer": "^1.1.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "redis": "^2.4.2",
+    "validator": "^3.41.2",
+    "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "~6.3.13",
+    "babel-plugin-transform-flow-strip-types": "^6.3.15",
+    "babel-preset-es2015-node5": "^1.1.1",
+    "babel-preset-stage-0": "^6.3.13",
+    "gulp": "^3.9.0",
+    "gulp-babel": "^6.1.1",
+    "gulp-live-server": "0.0.29",
+    "gulp-node-inspector": "^0.1.0",
+    "gulp-nodemon": "^2.0.4",
+    "gulp-shell": "^0.5.1",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-util": "^3.0.7",
+    "gulp-watch": "^4.3.5",
+    "jshint": "latest",
+    "nodemon": "^1.8.1",
+    "nsp": "^2.0.0",
+    "rimraf": "^2.4.4",
+    "run-sequence": "^1.1.5",
+    "source-map-support": "^0.4.0"
+  },
+  "license": {
+    "type": "MIT"
+  }
+}

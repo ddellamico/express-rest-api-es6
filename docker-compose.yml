@@ -1,0 +1,18 @@
+web:
+  build: .
+  working_dir: /home/damien/Projects/pet-finder/server
+  ports:
+    - "3000:3000"
+    - "5959:5858"
+    - "3547:3547"
+  command: npm run dev
+  volumes:
+    - .:/home/damien/Projects/pet-finder/server
+  environment:
+    NODE_ENV: development
+  links:
+    - db
+db:
+  image: mongo:latest
+  ports:
+   - "27017:27017"
