@@ -12,7 +12,7 @@ if(config.redis.isAvailable) {
     redisClient.auth(config.redis.auth);
 
     redisClient.on('connect', function () {
-        logger.info('Redis connected to ' + config.redis.host + ':' + config.redis.port);
+        logger.debug('Redis connected to ' + config.redis.host + ':' + config.redis.port);
     });
 
     redisClient.on('error', function (err) {

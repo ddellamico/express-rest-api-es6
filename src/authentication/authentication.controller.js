@@ -4,7 +4,6 @@ import logger from '../utils/logger';
 import passport from 'passport';
 import token from './token.controller';
 import User from '../user/user.model';
-import wrap from 'co-express';
 
 /**
  * Signin with email after passport authentication.
@@ -41,9 +40,7 @@ const signin =  (req, res, next) => {
 };
 
 function login(req, res) {
-    const redirectTo = req.session.returnTo
-        ? req.session.returnTo
-        : '/';
+    const redirectTo = req.session.returnTo ? req.session.returnTo : '/';
     delete req.session.returnTo;
     res.redirect(redirectTo);
 }

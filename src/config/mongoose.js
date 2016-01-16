@@ -7,7 +7,7 @@ import logger from '../utils/logger';
 /**
  * Create mongoose connection.
  *
- * @param {*=} cb The callback that start server
+ * @param {Function} cb The callback that start server
  */
 const createMongooseConnection = cb => {
 

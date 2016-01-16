@@ -22,7 +22,8 @@ User.find({}).remove(() => {
             firstName: 'user1',
             lastName: 'lastname1',
             email: 'user1@gmail.com',
-            password: 'test'
+            password: 'test',
+            roles: ['user']
         }, () => {
             logger.info('Finished populating users');
         }
@@ -32,15 +33,15 @@ User.find({}).remove(() => {
 Image.find({}).remove(function () {
     Image.create({
         fileName: 'image 1',
-        url: '',
+        url: 'http://lorempixel.com/400/200/animals/1/',
         user: testUserId
     }, {
         fileName: 'image 2',
-        url: '',
+        url: 'http://lorempixel.com/400/200/animals/2/',
         user: testUserId
     }, {
         fileName: 'image 3',
-        url: '',
+        url: 'http://lorempixel.com/400/200/animals/3/',
         user: testUserId
     }, () => {
         logger.info('Finished populating images');

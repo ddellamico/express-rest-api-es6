@@ -43,5 +43,5 @@ const stream = {
     }
 };
 
-export {stream};
+export default {stream};
 

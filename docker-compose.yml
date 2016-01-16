@@ -1,18 +1,23 @@
 web:
   build: .
-  working_dir: /home/damien/Projects/pet-finder/server
+  working_dir: /home/app
   ports:
     - "3000:3000"
-    - "5959:5858"
-    - "3547:3547"
+    - "5858:5858"
   command: npm run dev
   volumes:
-    - .:/home/damien/Projects/pet-finder/server
+    - .:/home/app
   environment:
     NODE_ENV: development
   links:
-    - db
-db:
+    - mongo
+    - redis
+mongo:
   image: mongo:latest
+  command: mongod --smallfiles --quiet --logpath=/dev/null
   ports:
    - "27017:27017"
+redis:
+  image: redis:latest
+  ports:
+   - "6379:6379"

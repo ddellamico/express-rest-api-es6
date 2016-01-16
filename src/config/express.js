@@ -2,17 +2,13 @@
 
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
-import multer from 'multer';
-import pathUtils from '../utils/path-utils';
 import config from './config';
 import passport from './passport';
 import routes from './routes';
-import logger from '../utils/logger';
 
 /**
  * An Express class to configure Express application.
@@ -56,7 +52,6 @@ class Express {
         // Request body parsing middleware should be above methodOverride
         this.app.use(bodyParser.urlencoded({extended: true}));
         this.app.use(bodyParser.json());
-        this.app.use(multer().array('image', 1));
         this.app.use(methodOverride());
     }
 

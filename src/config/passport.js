@@ -1,9 +1,6 @@
 'use strict';
 
-import mongoose from 'mongoose';
 import passport from 'passport';
-import logger from '../utils/logger';
-import User from '../user/user.model';
 import local from './passport/local';
 
 class Passport {

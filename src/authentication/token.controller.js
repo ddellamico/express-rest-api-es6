@@ -60,7 +60,8 @@ const createToken = (payload) => {
         throw new Error('ttl is not a valid Number');
     }
 
-    const token = jwt.sign({ id: payload.id, email: payload.email }, config.token.secret, { expiresIn: config.token.expiration });
+    const token = jwt.sign({ id: payload.id, email: payload.email },
+        config.token.secret, { expiresIn: config.token.expiration });
 
     return token;
 };

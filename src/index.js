@@ -1,9 +1,8 @@
 'use strict';
 
-import server from './config/express';
 import config from './config/config';
+import server from './config/express';
 import mongodb from './config/mongoose';
-import logger from './utils/logger';
 import pkg from  '../package.json';
 
 const banner = `
