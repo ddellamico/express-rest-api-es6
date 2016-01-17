@@ -37,11 +37,3 @@ const logger = new (winston.Logger)({
 
 export default logger;
 
-const stream = {
-    write: function (message) {
-        logger.info(message);
-    }
-};
-
-export default {stream};
-
