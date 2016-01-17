@@ -4,6 +4,7 @@ import logger from '../utils/logger';
 import passport from 'passport';
 import token from './token.controller';
 import User from '../user/user.model';
+import wrap from 'co-express';
 
 /**
  * Signin with email after passport authentication.
@@ -16,7 +17,7 @@ import User from '../user/user.model';
  */
 const signin =  (req, res, next) => {
 
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', wrap(function* (err, user, info) {
         let error = err || info;
         if (error) {
             return res.status(401).send(error);
@@ -27,7 +28,7 @@ const signin =  (req, res, next) => {
         user.salt = undefined;
 
         try {
-            const jwtToken = token.createToken(user);
+            const jwtToken = yield token.createToken(user);
             res.status(201).json({
                 token: jwtToken
             });
@@ -36,20 +37,14 @@ const signin =  (req, res, next) => {
             res.status(401).send(err);
         }
 
-    })(req, res, next);
+    }))(req, res, next);
 };
-
-function login(req, res) {
-    const redirectTo = req.session.returnTo ? req.session.returnTo : '/';
-    delete req.session.returnTo;
-    res.redirect(redirectTo);
-}
 
 /**
  * Signout user and expire token.
  *
  * @param {Object} req  The request object
- * @param {Object} res  The request object
+ * @param {Object} res  The response object
  * @api public
  */
 const signout = (req, res) => {
@@ -115,26 +110,22 @@ const signup = (req, res) => {
  * to the request if authenticated.
  *
  * @param {Object} req  The request object
- * @param {Object} res  The request object
- * @param {Object} next The request object
+ * @param {Object} res  The response object
+ * @param {Function} next The next function
  * @api public
  */
-const isAuthenticated = (req, res, next) => {
+const isAuthenticated = wrap(function* (req, res, next)  {
 
-    token.verifyToken(req.headers, (err, data) => {
-
-        if (err) {
-            logger.error(err.message);
-            return res.status(401).send(err.message);
-        }
-
-        req.user = data;
-
+    try {
+        const result = yield token.verifyToken(req.headers);
+        req.user = result;
         next();
-    });
-
-};
+    } catch(err) {
+        logger.error(err);
+        return res.status(400).send(err);
+    }
+});
 
 export default {
-    signin, login, signout, signup, isAuthenticated
+    signin, signout, signup, isAuthenticated
 };

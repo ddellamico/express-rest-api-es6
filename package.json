@@ -4,6 +4,7 @@
   "description": "Express & ES6 REST API Boilerplate",
   "author": {
     "name": "Damien Dell'Amico",
+    "email": "damien.dellamico@gmail.com",
     "url": "https://github.com/ddellamico"
   },
   "main": "src/index.js",
@@ -14,7 +15,6 @@
     "debug": "NODE_PORT=3001 iron-node src/debug.js",
     "prod": "node ./dist/index",
     "lint": "jshint src/**/*.js",
-    "missing": "npm ls --depth 1",
     "outdated": "npm outdated --depth 0",
     "prepush": "npm shrinkwrap && npm test",
     "postmerge": "npm install"
@@ -28,7 +28,8 @@
     "url": "https://github.com/ddellamico/express-rest-api-es6"
   },
   "engines": {
-    "node": ">=5.x"
+    "node": ">=5.x",
+    "npm": ">=2.x"
   },
   "bugs": {
     "url": "https://github.com/ddellamico/express-rest-api-es6/issues"
@@ -44,6 +45,7 @@
     "express"
   ],
   "dependencies": {
+    "bluebird": "^3.1.1",
     "body-parser": "^1.12.2",
     "co-express": "^1.2.1",
     "cors": "^2.7.1",

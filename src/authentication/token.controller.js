@@ -2,6 +2,7 @@
 
 import jwt from 'jsonwebtoken';
 import redis from '../config/redis';
+import Promise from 'bluebird';
 import config from  '../config/config';
 
 /**
@@ -18,11 +19,12 @@ const extractTokenFromHeader = (headers) => {
         throw new Error('Header is null');
     }
 
-    if (headers.authorization === null) {
+    if (!headers.authorization) {
         throw new Error('Authorizadtion header is null');
     }
 
     const authorization = headers.authorization;
+
     const authArr = authorization.split(' ');
     if (authArr.length !== 2) {
         throw new Error('Authorization header value is not of length 2');
@@ -49,21 +51,37 @@ const extractTokenFromHeader = (headers) => {
  * @returns {string} return the token if successfully created
  */
 const createToken = (payload) => {
+    return new Promise((resolve, reject) => {
 
-    const ttl = config.token.expiration;
+        const ttl = config.token.expiration;
 
-    if (payload !== null && typeof payload !== 'object') {
-        throw new Error('payload is not an Object');
-    }
+        if (payload !== null && typeof payload !== 'object') {
+            return reject('payload is not an Object');
+        }
 
-    if (ttl !== null && typeof ttl !== 'number') {
-        throw new Error('ttl is not a valid Number');
-    }
+        if (ttl !== null && isNaN(ttl)) {
+            return reject('ttl is not a valid Number');
+        }
 
-    const token = jwt.sign({ id: payload.id, email: payload.email },
-        config.token.secret, { expiresIn: config.token.expiration });
+        const token = jwt.sign({id: payload.id, email: payload.email},
+            config.token.secret, {expiresIn: config.token.expiration});
 
-    return token;
+        if (redis) {
+            // stores a token with payload data for a ttl period of time
+            redis.setexAsync(token, parseInt(ttl, 10), JSON.stringify(payload)).then(result => {
+                if (!result) {
+                    reject('Token not set in Redis');
+                }
+                resolve(token);
+
+            }).catch(reason => {
+                reject(reason);
+            });
+
+        } else {
+            return Promise.resolve(token);
+        }
+    });
 };
 
 /**
@@ -112,39 +130,39 @@ const expireToken = (headers, cb) => {
  *
  * @method verifyToken
  * @param {Object}   headers The request headers
- * @param {Function} cb      Callback function
  * @returns {Function} callback function `callback(null, JSON.parse(userData))` if token exist
  */
-const verifyToken = (headers, cb) => {
+const verifyToken = (headers) => {
 
-    try {
+    return new Promise((resolve, reject) => {
 
-        const token = extractTokenFromHeader(headers);
+        let token;
 
-        if (token === null) {
-            return cb(new Error('Token is null'));
+        try {
+            token = extractTokenFromHeader(headers);
+        } catch(err) {
+            return reject(err);
+        }
+
+        if (!token) {
+            return reject('Token is null');
         }
 
         if (redis) {
             // gets the associated data of the token
-            redis.get(token, (err, userData) => {
-                if (err) {
-                    return cb(err);
+            redis.getAsync(token).then(result => {
+                if (!result) {
+                    return reject('Token not found');
                 }
-
-                if (!userData) {
-                    return cb(new Error('Token not found'));
-                }
-
-                return cb(null, JSON.parse(userData));
+                resolve(JSON.parse(result));
+            }).catch(reason => {
+                reject(reason);
             });
 
         } else {
-            cb(null, true);
+            return Promise.resolve(token);
         }
-    } catch (err) {
-        return cb(err);
-    }
+    });
 };
 
 export default {createToken, expireToken, verifyToken};
