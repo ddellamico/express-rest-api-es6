@@ -18,9 +18,10 @@ JSON Web Token, error-handling, logging etc. Express app, Redis and mongo docker
   
 ## Install
   
-  ```sh
+  ```bash
   $ git clone https://github.com/ddellamico/express-rest-api-es6
-    
+  ```
+  
   Run `docker-compose up` to create and start the container. 
   The app should then be running on your docker daemon on port 3000 (On OS X you can use boot2docker ip to find out the IP address).
   
