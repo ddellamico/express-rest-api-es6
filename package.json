@@ -10,10 +10,10 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node src/debug.js",
-    "babel": "babel 'src' --out-dir dist --source-maps",
-    "dev": "nodemon ./src/debug.js -L --watch 'src/**/*' --ext 'js'",
-    "debug": "NODE_PORT=3001 iron-node src/debug.js",
     "prod": "node ./dist/index",
+    "babel": "./node_modules/.bin/babel 'src' --out-dir dist --source-maps",
+    "dev": "nodemon ./src/debug.js -L --watch 'src/**/*' --ext 'js'",
+    "debug": "NODE_PO RT=3001 iron-node src/debug.js",
     "lint": "jshint src/**/*.js",
     "outdated": "npm outdated --depth 0",
     "prepush": "npm shrinkwrap && npm test",
@@ -66,8 +66,9 @@
     "winston": "^2.1.1"
   },
   "devDependencies": {
-    "babel-core": "~6.3.13",
-    "babel-preset-es2015-node5": "^1.1.1",
+    "babel-cli": "~6.4.5",
+    "babel-core": "~6.4.5",
+    "babel-preset-es2015-node5": "^1.1.2",
     "jshint": "latest",
     "nodemon": "^1.8.1",
     "nsp": "^2.0.0",

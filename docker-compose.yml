@@ -4,7 +4,7 @@ web:
   ports:
     - "3000:3000"
     - "5858:5858"
-  command: npm run dev
+  command: npm start
   volumes:
     - .:/home/app
   environment:

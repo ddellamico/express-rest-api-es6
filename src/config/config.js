@@ -33,8 +33,8 @@ const config = Object.freeze({
 
     redis: {
         isAvailable: process.env.IS_REDIS_AVAILABLE || false,
-        host: process.env.REDIS_HOST || process.env.EXPRESSRESTAPIES6_REDIS_1_PORT_6379_TCP_ADDR || '127.0.0.1',
-        port: process.env.REDIS_PORT || process.env.EXPRESSRESTAPIES6_REDIS_1_PORT_6379_TCP_PORT || 6379,
+        host: process.env.APP_REDIS_HOST || process.env.EXPRESSRESTAPIES6_REDIS_1_PORT_6379_TCP_ADDR || '127.0.0.1',
+        port: process.env.APP_REDIS_PORT || process.env.EXPRESSRESTAPIES6_REDIS_1_PORT_6379_TCP_PORT || 6379,
         auth: process.env.REDIS_AUTH || '',
         options: {}
     }

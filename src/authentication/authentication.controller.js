@@ -10,9 +10,9 @@ import wrap from 'co-express';
  * Signin with email after passport authentication.
  *
  * @param {Object} req  The request object
- * @param {Object} res  The request object
- * @param {Object} next The request object
- * @returns {Object} the new created JWT token
+ * @param {Object} res  The response object
+ * @param {Function} next The next function
+ * @returns {string} the new created JWT token
  * @api public
  */
 const signin =  (req, res, next) => {
@@ -68,7 +68,7 @@ const signout = (req, res) => {
  *
  * @param {Object} req The request object
  * @param {Object} res The response object
- * @returns {Object} the new created JWT token
+ * @returns {string} the new created JWT token
  * @api public
  */
 const signup = (req, res) => {
